@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie & Macro Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 50px;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="text"], input[type="password"], input[type="number"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calorie & Macro Tracker</h1>
+        
+        <!-- Login Form -->
+        <div id="login-form">
+            <h2>Login</h2>
+            <form>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Calorie & Macro Tracking Form -->
+        <div id="tracking-form" style="display:none;">
+            <h2>Track Your Intake</h2>
+            <form>
+                <label for="food">Food Item</label>
+                <input type="text" id="food" name="food" required>
+                
+                <label for="calories">Calories</label>
+                <input type="number" id="calories" name="calories" required>
+                
+                <label for="protein">Protein (g)</label>
+                <input type="number" id="protein" name="protein" required>
+                
+                <label for="carbs">Carbs (g)</label>
+                <input type="number" id="carbs" name="carbs" required>
+                
+                <label for="fat">Fat (g)</label>
+                <input type="number" id="fat" name="fat" required>
+                
+                <button type="button" onclick="addEntry()">Add Entry</button>
+            </form>
+
+            <h2>Your Entries</h2>
+            <ul id="entries"></ul>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const trackingForm = document.getElementById('tracking-form');
+        const entriesList = document.getElementById('entries');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            loginForm.style.display = 'none';
+            trackingForm.style.display = 'block';
+        });
+
+        function addEntry() {
+            const food = document.getElementById('food').value;
+            const calories = document.getElementById('calories').value;
+            const protein = document.getElementById('protein').value;
+            const carbs = document.getElementById('carbs').value;
+            const fat = document.getElementById('fat').value;
+
+            const entry = document.createElement('li');
+            entry.textContent = `${food}: ${calories} kcal, Protein: ${protein}g, Carbs: ${carbs}g, Fat: ${fat}g`;
+            entriesList.appendChild(entry);
+
+            document.getElementById('food').value = '';
+            document.getElementById('calories').value = '';
+            document.getElementById('protein').value = '';
+            document.getElementById('carbs').value = '';
+            document.getElementById('fat').value = '';
+        }
+    </script>
+</body>
+</html>
